@@ -28,17 +28,36 @@ pinMode(LED_BUILTIN, OUTPUT);
 void loop() {
   // put your main code here, to run repeatedly:
  if(flag_barrilet == false) {home_barrilet();}
+
+ else{
+    for(int i=0; i<1580; i++){
+      passo();
+      }
+    delay(500);
+
+    for(int i=0; i<2420; i++){
+      passof();
+      }
+    delay(2000);
+  }
 }
 
 
 void passo(){
   
   digitalWrite(LED_BUILTIN, HIGH);
-  delay(100);
+  delayMicroseconds(150);
   digitalWrite(LED_BUILTIN,LOW);
-  delay(100);
+  delayMicroseconds(150);
 }
 
+void passof(){
+  
+  digitalWrite(LED_BUILTIN, HIGH);
+  delayMicroseconds(80);
+  digitalWrite(LED_BUILTIN,LOW);
+  delayMicroseconds(80);
+}
 void home_barrilet() {
   while(digitalRead(sensor_barrilet) == HIGH) {
       passo();
