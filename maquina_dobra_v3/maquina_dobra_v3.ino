@@ -12,8 +12,8 @@ const int direcao_m2 = 9;
 // pinos de entrada digital
 const int sensor_barrilet = 2;
 const int botao_pausa = 3;
-const int fim_curso1 = 7;
-const int fim_curso2 = 6;
+const int fim_curso1 = 11;
+const int fim_curso2 = 7;
 
 //variaveis do sistema
 bool flag_barrilet = false;
@@ -34,7 +34,7 @@ pinMode(fim_curso2, INPUT_PULLUP);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  
  /*if(flag_barrilet == false) {home_barrilet();}
 
  else{
@@ -47,9 +47,9 @@ void loop() {
       passof();
       }
     delay(2000);
-  }  */
- // if(flag_m1 == false){home_m1();}
- home_m1();
+  }  
+  */
+  if(flag_m1 == false){home_m1();} 
 }
 
 
@@ -82,13 +82,17 @@ void home_m1(){
     passo_m1();
     }
     flag_m1 = true;
+    digitalWrite(direcao_m1, LOW);
+    for(int j=1; j<2000; j++){
+      passo_m1();
+    }
   }
 
   void passo_m1(){
   
   digitalWrite(pulso_m1, HIGH);
-  delayMicroseconds(3000);
+  delayMicroseconds(1000);
   digitalWrite(pulso_m1,LOW);
-  delayMicroseconds(3000);
+  delayMicroseconds(1000);
   }
   
