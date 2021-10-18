@@ -5,7 +5,7 @@
 //pinos de saida digital
 const int pulso_m1 = 4;
 const int direcao_m1 = 12;
-const int pulso_m2 = 8;
+const int pulso_m2 = 10;
 const int direcao_m2 = 9;
 
 //
@@ -13,12 +13,13 @@ const int direcao_m2 = 9;
 const int sensor_barrilet = 2;
 const int botao_pausa = 3;
 const int fim_curso1 = 11;
-const int fim_curso2 = 7;
+const int fim_curso2 = 3;
 
 //variaveis do sistema
 bool flag_barrilet = false;
 bool flag_m1 = false;
 bool flag_m2 = false;
+int t;
 
 void setup() {
   // put your setup code here, to run once:
@@ -49,28 +50,29 @@ void loop() {
     delay(2000);
   }  
   */
-  if(flag_m1 == false){home_m1();} 
+  if(flag_m1 == false){home_m1();}
+  if(flag_m2 == false){home_m2();} 
 }
 
 
-void passo(){
+int passo(int t){
   
   digitalWrite(LED_BUILTIN, HIGH);
-  delayMicroseconds(150);
+  delayMicroseconds(t);
   digitalWrite(LED_BUILTIN,LOW);
-  delayMicroseconds(150);
+  delayMicroseconds(t);
 }
 
-void passof(){
+/*void passof(){
   
   digitalWrite(LED_BUILTIN, HIGH);
   delayMicroseconds(80);
   digitalWrite(LED_BUILTIN,LOW);
   delayMicroseconds(80);
-}
+}*/
 void home_barrilet() {
   while(digitalRead(sensor_barrilet) == HIGH) {
-      passo();
+      passo(1000);
       }
   flag_barrilet = true;
   delay(2000);
@@ -79,20 +81,43 @@ void home_barrilet() {
 void home_m1(){
   while(digitalRead(fim_curso1) == HIGH){
     digitalWrite(direcao_m1, HIGH);
-    passo_m1();
+    passo_m1(800);
     }
+    delay(100);
     flag_m1 = true;
     digitalWrite(direcao_m1, LOW);
     for(int j=1; j<2000; j++){
-      passo_m1();
+      passo_m1(300);
     }
   }
 
-  void passo_m1(){
+  int passo_m1(int t){
   
   digitalWrite(pulso_m1, HIGH);
-  delayMicroseconds(1000);
+  delayMicroseconds(t);
   digitalWrite(pulso_m1,LOW);
-  delayMicroseconds(1000);
+  delayMicroseconds(t);
+  }
+  //----------------------------------------------
+
+  void home_m2(){
+  while(digitalRead(fim_curso1) == HIGH){
+    digitalWrite(direcao_m2, HIGH);
+    passo_m2(800);
+    }
+    delay(100);
+    flag_m2 = true;
+    digitalWrite(direcao_m2, LOW);
+    for(int j=1; j<2000; j++){
+      passo_m2(300);
+    }
+  }
+
+  int passo_m2(int t){
+  
+  digitalWrite(pulso_m2, HIGH);
+  delayMicroseconds(t);
+  digitalWrite(pulso_m2,LOW);
+  delayMicroseconds(t);
   }
   
