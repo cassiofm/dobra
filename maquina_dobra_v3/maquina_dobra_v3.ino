@@ -4,16 +4,16 @@
 
 //pinos de saida digital
 const int pulso_m1 = 4;
-const int direcao_m1 = 12;
-const int pulso_m2 = 10;
+const int direcao_m1 = 5;
+const int pulso_m2 = 8;
 const int direcao_m2 = 9;
 
 //
 // pinos de entrada digital
 const int sensor_barrilet = 2;
 const int botao_pausa = 3;
-const int fim_curso1 = 11;
-const int fim_curso2 = 3;
+const int fim_curso1 = 6;
+const int fim_curso2 = 7;
 
 //variaveis do sistema
 bool flag_barrilet = false;
@@ -36,22 +36,37 @@ pinMode(fim_curso2, INPUT_PULLUP);
 
 void loop() {
   
- /*if(flag_barrilet == false) {home_barrilet();}
-
+ if(flag_barrilet == false) {home_barrilet();}
+ if(flag_m1 == false){home_m1();}
+ if(flag_m2 == false){home_m2();}
  else{
     for(int i=0; i<1580; i++){
-      passo();
+      passo(150);
       }
     delay(500);
 
     for(int i=0; i<2420; i++){
-      passof();
+      passo(60);
       }
     delay(2000);
+
+    for(int k =0; k<600; k++){
+      digitalWrite(direcao_m1, LOW);
+      passo_m1(800);
+      digitalWrite(direcao_m2, LOW);
+      passo_m2(800);
+      }
+
+for(int k =0; k<600; k++){
+      digitalWrite(direcao_m1, HIGH);
+      passo_m1(200);
+      digitalWrite(direcao_m2, HIGH);
+      passo_m2(200);
+      }
+      
   }  
-  */
-  if(flag_m1 == false){home_m1();}
-  if(flag_m2 == false){home_m2();} 
+  
+ 
 }
 
 
@@ -72,7 +87,7 @@ int passo(int t){
 }*/
 void home_barrilet() {
   while(digitalRead(sensor_barrilet) == HIGH) {
-      passo(1000);
+      passo(100);
       }
   flag_barrilet = true;
   delay(2000);
@@ -101,7 +116,7 @@ void home_m1(){
   //----------------------------------------------
 
   void home_m2(){
-  while(digitalRead(fim_curso1) == HIGH){
+  while(digitalRead(fim_curso2) == HIGH){
     digitalWrite(direcao_m2, HIGH);
     passo_m2(800);
     }
