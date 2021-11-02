@@ -40,28 +40,28 @@ void loop() {
  if(flag_m1 == false){home_m1();}
  if(flag_m2 == false){home_m2();}
  else{
-    for(int i=0; i<1580; i++){
-      passo(150);
+    for(int i=0; i<1582; i++){
+      passo(230);
       }
-    delay(500);
+    delay(700);
 
-    for(int i=0; i<2420; i++){
-      passo(60);
+    for(int i=0; i<2418; i++){
+      passo(200);
       }
-    delay(2000);
+    delay(1000);
 
-    for(int k =0; k<600; k++){
+    for(int k =0; k<1100; k++){
       digitalWrite(direcao_m1, LOW);
-      passo_m1(800);
+      passo_m1(900);
       digitalWrite(direcao_m2, LOW);
-      passo_m2(800);
+      passo_m2(900);
       }
-
-for(int k =0; k<600; k++){
+delay(1000);
+for(int k =0; k<1100; k++){
       digitalWrite(direcao_m1, HIGH);
-      passo_m1(200);
+      passo_m1(150);
       digitalWrite(direcao_m2, HIGH);
-      passo_m2(200);
+      passo_m2(150);
       }
       
   }  
